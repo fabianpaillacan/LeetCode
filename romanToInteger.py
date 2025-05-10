@@ -1,15 +1,19 @@
 class Solution:
     def romanToInt(self, s: str) -> int:
-        diccionario = {
+        diccionario = { 
             'I': 1, 'V': 5, 'X': 10, 'L': 50,
             'C': 100, 'D': 500, 'M': 1000
         }
-
         result = 0
-
-        for i in s:
-            if i in diccionario:
-                result = result + diccionario[i]
+        prev_value = 0
         
-        return result 
-    # me falta saber cuando hay IV y esos tipos de casos
+        #numeros = list(s)
+        for char in reversed(s):
+            value = diccionario[char]
+            if value < prev_value:
+                result -= value
+            else:
+                result += value
+            prev_value = value
+        
+        return result
